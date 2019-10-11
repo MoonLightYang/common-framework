@@ -1,0 +1,40 @@
+package com.saas.framework.basic.inter;
+
+import java.util.List;
+
+import com.saas.framework.params.Id;
+import com.saas.framework.params.QueryPage;
+
+public interface IMapper<T> {
+
+	/**
+	 * 新增
+	 */
+	Integer add(T t);
+
+	/**
+	 * 根据Id查询
+	 */
+	T find(Id id);
+
+	/**
+	 * 分页查询
+	 */
+	List<T> findPage(QueryPage query);
+
+	/**
+	 * 根据Id删除
+	 */
+	Integer del(Id id);
+
+	/**
+	 * 根据Id修改
+	 */
+	Integer update(T t);
+
+	/**
+ 	   *   查询记录数量
+	 */
+	Long findCount();
+
+}
