@@ -11,10 +11,10 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com-common</groupId>
-	<artifactId>common-framework</artifactId>
+	<groupId>com.framework</groupId>
+	<artifactId>framework-common</artifactId>
 	<version>0.0.1</version>
-	<name>common-framework</name>
+	<name>framework-common</name>
 
 	<dependencies>
 		<dependency>
@@ -61,12 +61,10 @@
 
 	<distributionManagement>
 		<repository>
-			<id>releases</id>
-			<url>http://192.168.14.250:8081/repository/maven-releases/</url>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://192.168.14.250:8081/repository/maven-snapshots/</url>
-		</snapshotRepository>
+		<!-- https://oss.sonatype.org/service/local/staging/deploy/maven2 -->
 	</distributionManagement>
 </project>
