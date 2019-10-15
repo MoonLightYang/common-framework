@@ -21,6 +21,9 @@ public class EnumUtils {
 		for (Resource resource : resources) {
 			String name = resource.getURL().toString();
 			String[] pathArr = name.split("classes/");
+			if(pathArr.length < 2)
+				pathArr = name.split("!/");
+			
 			String path = pathArr[1].replace("/", ".").replace(".class", "");
 			Class<?> clazz = Class.forName(path, true, classloader);
 			
@@ -31,4 +34,7 @@ public class EnumUtils {
 		return classes;
 	}
 
+	public static void main(String[] args) {
+		
+	}
 }

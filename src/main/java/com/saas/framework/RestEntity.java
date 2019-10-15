@@ -38,16 +38,14 @@ public class RestEntity {
 	public static RestEntity build() {
 		return new RestEntity();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public RestEntity fastData(String key, Object value) {
-		if(this.data instanceof HashMap) {
+		if (this.data instanceof HashMap) {
 			((HashMap) data).put(key, value);
 		}
 		return this;
 	}
-	
-	
 
 	public RestEntity code(Integer code) {
 		this.code = code;
