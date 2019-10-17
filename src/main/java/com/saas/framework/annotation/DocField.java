@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD })
 public @interface DocField {
 
 	String name() default ""; // 字段名称
@@ -16,7 +16,5 @@ public @interface DocField {
 	String sample() default ""; // 示例
 
 	String remark() default ""; // 备注
-
-	String range() default ""; // 长度范围限制
 
 }

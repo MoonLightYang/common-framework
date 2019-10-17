@@ -44,6 +44,10 @@ public class RestHandlerAop {
 		HttpServletRequest request = atts.getRequest();
 		HttpServletResponse response = atts.getResponse();
 
+		String uri = request.getRequestURI();
+		if (uri.contains("api/"))
+			return point.proceed();
+
 		HandlerParams params = new HandlerParams();
 		params.setRequest(request);
 		params.setResponse(response);
@@ -55,15 +59,15 @@ public class RestHandlerAop {
 		String clazzStr = point.getTarget().toString();
 		String clazz = clazzStr.substring(0, clazzStr.indexOf("@"));
 		params.setClassName(clazz);
-		
+
 		String token = request.getHeader(SessionConst.ACCESS_TOKEN);
 		String loginKey = SessionConst.PREFIX_TOKEN + token;
 		String authKey = SessionConst.PREFIX_AUTH + token;
 		params.setToken(token);
 		params.setLoginKey(loginKey);
 		params.setAuthKey(authKey);
-		params.setUri(request.getRequestURI());
-		
+		params.setUri(uri);
+
 		Object result = handlerManager.aroundHandler(params);
 		if (result != null)
 			return result;
