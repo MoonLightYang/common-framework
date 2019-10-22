@@ -14,7 +14,7 @@ public class EnumUtils {
 	public static List<Class<?>> getAllAssignedClass(Class<?> superClass) throws Exception {
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		ResourcePatternResolver resover = new PathMatchingResourcePatternResolver();
-		String scan = "classpath*:com/saas/**/enumer/*.class";
+		String scan = "classpath*:com/zhyl/**/enumer/*.class";
 		Resource[] resources = resover.getResources(scan);
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		Class<?> iEnumClass = IEnum.class;
