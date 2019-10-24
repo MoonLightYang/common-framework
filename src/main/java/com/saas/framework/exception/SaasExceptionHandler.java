@@ -20,6 +20,7 @@ public class SaasExceptionHandler {
 
 	@ExceptionHandler(value = BindException.class)
 	public RestEntity handleBindException(BindException ex) {
+		ex.printStackTrace();
 		List<String> infos = ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage)
 				.collect(Collectors.toList());
 		return RestEntity.FAIL().info(infos.get(0));
@@ -27,6 +28,7 @@ public class SaasExceptionHandler {
 
 	@ExceptionHandler(value = { ConstraintViolationException.class })
 	public RestEntity handleBindGetException(ConstraintViolationException ex) {
+		ex.printStackTrace();
 		List<String> infos = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage)
 				.collect(Collectors.toList());
 		return RestEntity.FAIL().info(infos.get(0));
@@ -34,12 +36,14 @@ public class SaasExceptionHandler {
 
 	@ExceptionHandler(value = SaasException.class)
 	public RestEntity handleException(SaasException ex) {
+		ex.printStackTrace();
 		String error = ex.getMessage();
 		return RestEntity.FAIL().info(error);
 	}
 
 	@ExceptionHandler(value = HttpMessageNotReadableException.class)
 	public RestEntity handleException(HttpMessageNotReadableException causeEx) {
+		causeEx.printStackTrace();
 		String error = "传入参数有误";
 		Throwable ex = causeEx.getCause();
 		if (ex instanceof InvalidFormatException)
@@ -50,6 +54,7 @@ public class SaasExceptionHandler {
 
 	@ExceptionHandler(value = Exception.class)
 	public RestEntity handleException(Exception ex) {
+		ex.printStackTrace();
 		String error = ex.getMessage();
 		return RestEntity.ERROR().info(error);
 	}

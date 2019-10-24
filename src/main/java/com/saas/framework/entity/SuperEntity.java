@@ -12,7 +12,7 @@ public class SuperEntity {
 	public Integer id; // 主键
 	@Getter
 	@Setter
-	public Integer companyId; // 公司Id
+	public Integer enterpriseId; // 公司Id
 	@Getter
 	@Setter
 	public String handler; // 操作人昵称

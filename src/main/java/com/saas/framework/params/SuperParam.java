@@ -20,16 +20,16 @@ public class SuperParam {
 	public String ipAddress; // ip 地址
 
 	@Getter
-	public Integer companyId; // 公司Id
+	public Integer enterpriseId; // 公司Id
 
 	public SuperParam() {
 	}
 
-	public void setCompanyId(Integer companyId) {
-		if (companyId == null || companyId < 1)
+	public void setCompanyId(Integer enterpriseId) {
+		if (enterpriseId == null || enterpriseId < 1)
 			throw new SaasException();
 
-		this.companyId = companyId;
+		this.enterpriseId = enterpriseId;
 	}
 
 }
