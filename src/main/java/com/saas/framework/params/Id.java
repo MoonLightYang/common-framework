@@ -9,10 +9,6 @@ public class Id extends SuperParam {
 	@Setter
 	public Integer id; // 物理主键
 
-	@Getter
-	@Setter
-	public Integer companyId;// 企业Id
-
 	public Id() {
 
 	}
