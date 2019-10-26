@@ -13,4 +13,8 @@ public class Id extends SuperParam {
 
 	}
 
+	public Id(Integer id) {
+		this.id = id;
+	}
+
 }
