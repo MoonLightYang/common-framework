@@ -29,7 +29,7 @@ public class SuperParam {
 	public SuperParam() {
 	}
 
-	public void setCompanyId(Integer enterpriseId) {
+	public void setEnterpriseId(Integer enterpriseId) {
 		if (enterpriseId == null || enterpriseId < 1)
 			throw new SaasException();
 
