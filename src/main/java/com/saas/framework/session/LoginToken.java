@@ -9,7 +9,7 @@ public class LoginToken {
 	private Integer roleId;
 	private String handler;
 	private Integer handlerId;
-	private Integer companyId;
+	private Integer enterpriseId;
 	private String ipAddress;
 
 }
