@@ -24,7 +24,7 @@ public class SuperEntity {
 	public YesOrNo is_delete; // 是否可用数据
 	@Getter
 	@Setter
-	public int version; // 版本号
+	public Integer version; // 版本号
 
 	public SuperEntity() {
 	}
