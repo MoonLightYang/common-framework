@@ -5,7 +5,7 @@ import java.util.List;
 import com.saas.framework.params.Id;
 import com.saas.framework.params.QueryPage;
 
-public interface IMapper<T> {
+public interface IMapper<T, P> {
 
 	/**
 	 * 新增
@@ -20,7 +20,7 @@ public interface IMapper<T> {
 	/**
 	 * 分页查询
 	 */
-	List<T> findPage(QueryPage query);
+	List<P> findPage(QueryPage query);
 
 	/**
 	 * 根据Id删除

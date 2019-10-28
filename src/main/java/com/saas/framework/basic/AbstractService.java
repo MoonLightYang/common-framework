@@ -8,9 +8,9 @@ import com.saas.framework.params.Id;
 import com.saas.framework.params.QueryPage;
 import com.saas.framework.view.PageList;
 
-public abstract class AbstractService<T> {
+public abstract class AbstractService<T, P> {
 
-	public abstract IMapper<T> mapper();
+	public abstract IMapper<T, P> mapper();
 
 	/**
 	 * 根据Id查询
@@ -22,10 +22,10 @@ public abstract class AbstractService<T> {
 	/**
 	 * 分页查询
 	 */
-	public PageList<T> findPage(QueryPage query) {
-		List<T> rows = this.mapper().findPage(query);
+	public PageList<P> findPage(QueryPage query) {
+		List<P> rows = this.mapper().findPage(query);
 		rows = (rows == null ? rows = Collections.emptyList() : rows); 
-		PageList<T> page = new PageList<T>();
+		PageList<P> page = new PageList<P>();
 		page.setRows(rows);
 		page.setPageNo(query.getPageNo());
 		page.setPageSize(query.getPageSize());

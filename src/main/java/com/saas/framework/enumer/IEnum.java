@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public interface IEnum {
 
+	@JsonValue
 	Integer getValue();
 
-	@JsonValue
 	String getText();
 }
