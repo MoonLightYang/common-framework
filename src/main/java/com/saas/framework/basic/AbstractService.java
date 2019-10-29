@@ -3,6 +3,8 @@ package com.saas.framework.basic;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
+
 import com.saas.framework.basic.inter.IMapper;
 import com.saas.framework.params.Id;
 import com.saas.framework.params.QueryPage;
@@ -26,7 +28,7 @@ public abstract class AbstractService<T, P> {
 		List<P> rows = this.mapper().findPage(query);
 		rows = (rows == null ? rows = Collections.emptyList() : rows);
 		PageList<P> page = new PageList<P>(query.getPageNo(), query.getPageSize(), rows);
-		
+
 		Long total = this.mapper().findPageCount(query);
 		page.setTotal(total);
 		return page;
@@ -37,6 +39,13 @@ public abstract class AbstractService<T, P> {
 	 */
 	public Integer del(Id id) {
 		return this.mapper().del(id);
+	}
+
+	/**
+	 * 编辑信息
+	 */
+	public Integer edit(@Validated T t) {
+		return this.mapper().edit(t);
 	}
 
 }

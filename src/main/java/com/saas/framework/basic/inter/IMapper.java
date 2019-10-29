@@ -35,7 +35,7 @@ public interface IMapper<T, P> {
 	/**
 	 * 根据Id修改
 	 */
-	Integer update(T t);
+	Integer edit(T t);
 
 	/**
 	 * 查询记录数量
