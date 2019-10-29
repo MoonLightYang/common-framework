@@ -23,6 +23,11 @@ public interface IMapper<T, P> {
 	List<P> findPage(QueryPage query);
 
 	/**
+	 * 分页查询统计总数
+	 */
+	Long findPageCount(QueryPage query);
+
+	/**
 	 * 根据Id删除
 	 */
 	Integer del(Id id);
@@ -33,7 +38,7 @@ public interface IMapper<T, P> {
 	Integer update(T t);
 
 	/**
- 	   *   查询记录数量
+	 * 查询记录数量
 	 */
 	Long findCount();
 
