@@ -1,7 +1,5 @@
 package com.saas.framework.params;
 
-import com.saas.framework.exception.SaasException;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +17,7 @@ public class SuperParam {
 	@Setter
 	public String ipAddress; // ip 地址
 
+	@Setter
 	@Getter
 	public Integer enterpriseId; // 公司Id
 
@@ -27,13 +26,6 @@ public class SuperParam {
 	public Integer version; // version
 
 	public SuperParam() {
-	}
-
-	public void setEnterpriseId(Integer enterpriseId) {
-		if (enterpriseId == null || enterpriseId < 1)
-			throw new SaasException();
-
-		this.enterpriseId = enterpriseId;
 	}
 
 }
