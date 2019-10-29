@@ -13,6 +13,11 @@ public interface IMapper<T, P> {
 	Integer add(T t);
 
 	/**
+	 * 修改对象
+	 */
+	Integer edit(T t);
+
+	/**
 	 * 根据Id查询
 	 */
 	T find(Id id);
@@ -31,11 +36,6 @@ public interface IMapper<T, P> {
 	 * 根据Id删除
 	 */
 	Integer del(Id id);
-
-	/**
-	 * 根据Id修改
-	 */
-	Integer edit(T t);
 
 	/**
 	 * 查询记录数量

@@ -3,8 +3,6 @@ package com.saas.framework.basic;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.validation.annotation.Validated;
-
 import com.saas.framework.basic.inter.IMapper;
 import com.saas.framework.params.Id;
 import com.saas.framework.params.QueryPage;
@@ -44,7 +42,7 @@ public abstract class AbstractService<T, P> {
 	/**
 	 * 编辑信息
 	 */
-	public Integer edit(@Validated T t) {
+	public Integer edit(T t) {
 		return this.mapper().edit(t);
 	}
 
