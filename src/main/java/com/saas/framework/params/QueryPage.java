@@ -1,10 +1,19 @@
 package com.saas.framework.params;
 
+import lombok.Getter;
+
 public class QueryPage extends SuperParam {
 
 	public Integer pageSize = 15; // 分页大小
 
 	public Integer pageNo = 1; // 分页编号
+
+	public Integer start; // 开始数
+	
+	public Integer getStart() {
+		this.start = this.pageSize * (this.pageNo - 1);
+		return start;
+	}
 
 	public Integer getPageSize() {
 		return pageSize;

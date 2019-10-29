@@ -24,11 +24,11 @@ public abstract class AbstractService<T, P> {
 	 */
 	public PageList<P> findPage(QueryPage query) {
 		List<P> rows = this.mapper().findPage(query);
-		rows = (rows == null ? rows = Collections.emptyList() : rows); 
-		PageList<P> page = new PageList<P>();
-		page.setRows(rows);
-		page.setPageNo(query.getPageNo());
-		page.setPageSize(query.getPageSize());
+		rows = (rows == null ? rows = Collections.emptyList() : rows);
+		PageList<P> page = new PageList<P>(query.getPageNo(), query.getPageSize(), rows);
+		
+		Long total = this.mapper().findPageCount(query);
+		page.setTotal(total);
 		return page;
 	}
 

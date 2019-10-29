@@ -19,10 +19,14 @@ public class PageList<T> {
 	@Setter
 	public List<T> rows;
 
+	@Getter
+	@Setter
+	public Long total;
+
 	public PageList() {
 	}
 
-	public PageList(Integer pageSize, Integer pageNo, List<T> rows) {
+	public PageList(Integer pageNo, Integer pageSize, List<T> rows) {
 		super();
 		this.pageSize = pageSize;
 		this.pageNo = pageNo;
