@@ -15,7 +15,7 @@ public interface IMapper<T, P> {
 	/**
 	 * 修改对象
 	 */
-	Integer edit(T t);
+	Integer update(T t);
 
 	/**
 	 * 根据Id查询

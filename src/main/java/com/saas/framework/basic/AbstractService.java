@@ -40,10 +40,10 @@ public abstract class AbstractService<T, P> {
 	}
 
 	/**
-	 * 编辑信息
+	 * 修改信息
 	 */
-	public Integer edit(T t) {
-		return this.mapper().edit(t);
+	public Integer update(T t) {
+		return this.mapper().update(t);
 	}
 
 }
