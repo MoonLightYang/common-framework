@@ -19,14 +19,17 @@ public class EnumUtils {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		Class<?> iEnumClass = IEnum.class;
 		for (Resource resource : resources) {
+			String path = null;
 			String name = resource.getURL().toString();
 			String[] pathArr = name.split("classes/");
-			if(pathArr.length < 2)
+			if (pathArr.length == 2) {
+				path = pathArr[1].replace("/", ".").replace(".class", "");
+			}else {
 				pathArr = name.split("!/");
-			
-			String path = pathArr[1].replace("/", ".").replace(".class", "");
+				path = pathArr[pathArr.length - 1].replace("/", ".").replace(".class", "");
+			}
+				
 			Class<?> clazz = Class.forName(path, true, classloader);
-			
 			if (iEnumClass.isAssignableFrom(clazz) && iEnumClass != clazz) {
 				classes.add(clazz);
 			}
@@ -34,7 +37,18 @@ public class EnumUtils {
 		return classes;
 	}
 
-	public static void main(String[] args) {
-		
-	}
+//	public static void main(String[] args) {
+//		String path ="";
+//		String name ="/usr/local/saas/test-java/saas-erp-app-0.0.1-SNAPSHOT.jar!/BOOT-INF/lib/saas-erp-basic-0.0.1-SNAPSHOT.jar!/com/saas/basic/enumer/Gender.class";
+//		String[] pathArr = name.split("classes/");
+//		if (pathArr.length == 2) {
+//			path = pathArr[1].replace("/", ".").replace(".class", "");
+//		}else {
+//			pathArr = name.split("!/");
+//			path = pathArr[pathArr.length - 1].replace("/", ".").replace(".class", "");
+//		}
+//			
+//		System.out.println("path : " + path);
+//	}
+	
 }
