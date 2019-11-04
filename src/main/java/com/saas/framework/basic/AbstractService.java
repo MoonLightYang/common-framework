@@ -13,6 +13,13 @@ public abstract class AbstractService<T, P> {
 	public abstract IMapper<T, P> mapper();
 
 	/**
+	 * 新增
+	 */
+	public Integer add(T t) {
+		return this.mapper().add(t);
+	}
+
+	/**
 	 * 根据Id查询
 	 */
 	public T find(Id id) {

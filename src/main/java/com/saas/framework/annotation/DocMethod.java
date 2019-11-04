@@ -6,6 +6,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javax.validation.constraints.Null;
+
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
@@ -15,8 +17,8 @@ public @interface DocMethod {
 
 	String name() default "";
 
-	Class<?> param();
+	Class<?> param() default Null.class;
 
-	Class<?> result();
+	Class<?> result() default Null.class;
 
 }
