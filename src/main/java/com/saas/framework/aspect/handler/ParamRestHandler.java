@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.saas.framework.aspect.IRestHandler;
 import com.saas.framework.params.SuperParam;
-import com.saas.framework.session.LoginToken;
+import com.saas.framework.session.TokenUser;
 
 @Component
 public class ParamRestHandler implements IRestHandler {
@@ -27,7 +27,7 @@ public class ParamRestHandler implements IRestHandler {
 	}
 
 	private void initCommonParam(HandlerParams params) {
-		LoginToken user = params.getLoginUser();
+		TokenUser user = params.getLoginUser();
 		if(user == null)
 			return;
 		
@@ -36,7 +36,7 @@ public class ParamRestHandler implements IRestHandler {
 		SuperParam param = (SuperParam) arg1;
 		
 		param.setHandler(user.getHandler());
-		param.setHandlerNo(user.getHandlerId());
+		param.setHandlerNo(user.getHandlerNo());
 		param.setEnterpriseId(user.getEnterpriseId());
 		
 		HttpServletRequest request = params.getRequest();

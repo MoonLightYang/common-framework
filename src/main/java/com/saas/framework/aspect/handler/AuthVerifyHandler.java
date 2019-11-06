@@ -8,7 +8,7 @@ import com.saas.framework.RestEntity;
 import com.saas.framework.annotation.AuthSign;
 import com.saas.framework.aspect.IRestHandler;
 import com.saas.framework.cache.RedisService;
-import com.saas.framework.session.LoginToken;
+import com.saas.framework.session.TokenUser;
 
 @Component
 public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRestHandler {
@@ -40,7 +40,7 @@ public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRes
 		if(StringUtils.isEmpty(loginUserJson))
 			return RestEntity.FAIL().info("登陆失效，请先登陆");
 		
-		LoginToken user = super.convert(loginUserJson);
+		TokenUser user = super.convert(loginUserJson);
 		params.setLoginUser(user);
 		
 		String authKey = params.getAuthKey();

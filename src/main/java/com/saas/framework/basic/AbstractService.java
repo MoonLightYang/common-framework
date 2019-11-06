@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.saas.framework.basic.inter.IMapper;
 import com.saas.framework.params.Id;
+import com.saas.framework.params.IdVersion;
 import com.saas.framework.params.QueryPage;
 import com.saas.framework.view.PageList;
 
@@ -42,8 +43,8 @@ public abstract class AbstractService<T, P> {
 	/**
 	 * 根据Id删除
 	 */
-	public Integer del(Id id) {
-		return this.mapper().del(id);
+	public Integer del(IdVersion idVersion) {
+		return this.mapper().del(idVersion);
 	}
 
 	/**

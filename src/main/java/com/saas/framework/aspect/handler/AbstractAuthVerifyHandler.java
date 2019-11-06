@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 import com.saas.framework.aspect.IRestHandler;
 import com.saas.framework.cache.RedisService;
 import com.saas.framework.exception.SaasException;
-import com.saas.framework.session.LoginToken;
+import com.saas.framework.session.TokenUser;
 import com.saas.framework.session.SessionConst;
 import com.saas.framework.utils.JsonUtils;
 
@@ -18,11 +18,11 @@ public abstract class AbstractAuthVerifyHandler implements IRestHandler {
 		redis.expire(authKey, SessionConst.SESSION_EXPIRE);
 	}
 
-	protected LoginToken convert(String userJson) {
+	protected TokenUser convert(String userJson) {
 		if (StringUtils.isEmpty(userJson))
 			throw new SaasException("Login User Cast Exception...");
 
-		return JsonUtils.toObject(userJson, LoginToken.class);
+		return JsonUtils.toObject(userJson, TokenUser.class);
 	}
 
 }

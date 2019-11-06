@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import com.saas.framework.session.LoginToken;
+import com.saas.framework.session.TokenUser;
 
 import lombok.Data;
 
@@ -25,6 +25,6 @@ public class HandlerParams {
 	private String loginKey;
 	private String authKey;
 	private String uri;
-	private LoginToken loginUser;
+	private TokenUser loginUser;
 
 }

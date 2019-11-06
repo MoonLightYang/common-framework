@@ -3,6 +3,7 @@ package com.saas.framework.basic.inter;
 import java.util.List;
 
 import com.saas.framework.params.Id;
+import com.saas.framework.params.IdVersion;
 import com.saas.framework.params.QueryPage;
 
 public interface IMapper<T, P> {
@@ -35,7 +36,7 @@ public interface IMapper<T, P> {
 	/**
 	 * 根据Id删除
 	 */
-	Integer del(Id id);
+	Integer del(IdVersion idVersion);
 
 	/**
 	 * 查询记录数量
