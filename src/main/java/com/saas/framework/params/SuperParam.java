@@ -21,10 +21,6 @@ public class SuperParam {
 	@Getter
 	public Integer enterpriseId; // 公司Id
 
-	@Getter
-	@Setter
-	public Integer version; // version
-
 	public SuperParam() {
 	}
 
