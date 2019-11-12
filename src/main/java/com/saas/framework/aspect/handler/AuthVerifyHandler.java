@@ -34,26 +34,26 @@ public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRes
 		// 1: verify if user logined
 		String loginKey = params.getLoginKey();
 		if (StringUtils.isEmpty(loginKey))
-			return RestEntity.FAIL().info("登录失效，请先登陆");
-		
+			return RestEntity.EXPIRE();
+
 		String loginUserJson = redisService.get(loginKey);
-		if(StringUtils.isEmpty(loginUserJson))
-			return RestEntity.FAIL().info("登陆失效，请先登陆");
-		
+		if (StringUtils.isEmpty(loginUserJson))
+			return RestEntity.EXPIRE();
+
 		TokenUser user = super.convert(loginUserJson);
 		params.setLoginUser(user);
-		
+
 		String authKey = params.getAuthKey();
-		if(StringUtils.isEmpty(authKey))
-			return RestEntity.FAIL().info("暂无此访问权限");
-		
+		if (StringUtils.isEmpty(authKey))
+			return RestEntity.FORBIDDEN();
+
 		String value = params.getUri();
 		boolean flag = redisService.hasSetValue(authKey, value);
 
 		// 2: verify user's auth
 		if (!flag)
-			return RestEntity.FAIL().info("暂无此访问权限");
-		
+			return RestEntity.FORBIDDEN();
+
 		// refresh token
 		super.refreshToken(redisService, params);
 		return null;

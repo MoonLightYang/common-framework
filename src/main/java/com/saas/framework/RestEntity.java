@@ -7,13 +7,17 @@ import lombok.Data;
 @Data
 public class RestEntity {
 
-	public static final int SUCCESS = 200;
-	public static final int FAIL = 400;
-	public static final int ERROR = 500;
+	private static final int SUCCESS = 200;
+	private static final int FAIL = 400;
+	private static final int ERROR = 500;
+	private static final int EXPIRE = 401;
+	private static final int FORBIDDEN = 403;
 
-	public static final String INFO_SUCCESS = "操作成功";
-	public static final String INFO_FAIL = "操作失败";
-	public static final String INFO_ERROR = "网络异常好像奔溃了...";
+	private static final String INFO_FORBIDDEN = "无权限，禁止访问";
+	private static final String INFO_EXPIRE = "登录失效";
+	private static final String INFO_SUCCESS = "操作成功";
+	private static final String INFO_FAIL = "操作失败";
+	private static final String INFO_ERROR = "网络好像奔溃了...";
 
 	private String info = INFO_SUCCESS;
 	private Integer code = SUCCESS;
@@ -23,16 +27,49 @@ public class RestEntity {
 
 	}
 
+	/**
+	 * 操作成功
+	 * 
+	 * @return
+	 */
 	public static RestEntity SUCCESS() {
 		return build();
 	}
 
+	/**
+	 * 操作失败
+	 * 
+	 * @return
+	 */
 	public static RestEntity FAIL() {
-		return build().code(400).info("操作失败");
+		return build().code(FAIL).info(INFO_FAIL);
 	}
 
+	/**
+	 * 操作异常
+	 * 
+	 * @return
+	 */
 	public static RestEntity ERROR() {
-		return build().code(500).info("系统异常");
+		return build().code(ERROR).info(INFO_ERROR);
+	}
+
+	/**
+	 * 登陆已失效
+	 * 
+	 * @return
+	 */
+	public static RestEntity EXPIRE() {
+		return build().code(EXPIRE).info(INFO_EXPIRE);
+	}
+
+	/**
+	 * 无权限，禁止访问
+	 * 
+	 * @return
+	 */
+	public static RestEntity FORBIDDEN() {
+		return build().code(FORBIDDEN).info(INFO_FORBIDDEN);
 	}
 
 	public static RestEntity build() {
