@@ -1,7 +1,13 @@
 package com.saas.framework.cache;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -21,28 +27,26 @@ public class RedisService {
 
 	@Autowired
 	private StringRedisTemplate template;
-	
-	
+
 	public void setHash(String key) {
-		
+
 		List<String> menus = new ArrayList<>();
 		menus.add("/company/add");
 		menus.add("/company/insert");
 		menus.add("/company/delete");
 		menus.add("/company/find");
-		
+
 		SetOperations<String, String> operate = template.opsForSet();
 		String[] values = menus.toArray(new String[menus.size()]);
 		operate.add(key, values);
 	}
-	
-	
+
 	public boolean hasSetValue(String key, String value) {
-		if(StringUtils.isEmpty(key))
+		if (StringUtils.isEmpty(key))
 			throw new SaasException("Redis Set key is not null");
-		if(StringUtils.isEmpty(value))
+		if (StringUtils.isEmpty(value))
 			throw new SaasException("Redis Set value is not null");
-		
+
 		SetOperations<String, String> operate = template.opsForSet();
 		return operate.isMember(key, value);
 	}
@@ -114,7 +118,7 @@ public class RedisService {
 	}
 
 	/**
-	 * 获取自增序号
+	 * 获取自增序号,如果没有当前key，则初始返回1
 	 *
 	 * @param key
 	 * @author Moon Yang
@@ -122,8 +126,35 @@ public class RedisService {
 	 */
 	public Integer getAndIncrement(String key) {
 		LettuceConnectionFactory factory = (LettuceConnectionFactory) template.getConnectionFactory();
-		RedisAtomicInteger atomic = new RedisAtomicInteger(key, factory, 1);
-		return atomic.getAndIncrement();
+		RedisAtomicInteger atomic = new RedisAtomicInteger(key, factory);
+		return atomic.getAndIncrement() + 1;
+	}
+
+	/**
+	 * 主要用于各种自增编号的生成，如果没有当前key，则初始返回1
+	 *
+	 * @param key
+	 * @author Moon Yang
+	 * @since 2018-05-18
+	 */
+	public Integer incrementLoopDay(String key) {
+		LettuceConnectionFactory factory = (LettuceConnectionFactory) template.getConnectionFactory();
+		RedisAtomicInteger atomic = new RedisAtomicInteger(key, factory);
+		Integer atomicInteger = atomic.getAndIncrement();
+		if (atomicInteger == 0) {
+			Date todayEnd = this.getExpireAt();
+			atomic.expireAt(todayEnd);
+		}
+
+		return atomicInteger + 1;
+	}
+
+	private Date getExpireAt() {
+		LocalDateTime todayEnd = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);// 当天零点
+		ZoneId zone = ZoneId.systemDefault();
+		Instant instant = todayEnd.atZone(zone).toInstant();
+		Date date = Date.from(instant);
+		return date;
 	}
 
 	/**
