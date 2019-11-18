@@ -8,6 +8,6 @@ public class SessionConst {
 	
 	public static final String PREFIX_AUTH = "auth_";
 	
-	public static final int SESSION_EXPIRE = 15;
+	public static final int SESSION_EXPIRE = 30;
 
 }

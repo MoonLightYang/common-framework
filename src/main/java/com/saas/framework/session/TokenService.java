@@ -15,6 +15,7 @@ public class TokenService {
 	
 	public String serializer(TokenUser tokenUser) {
 		String token = UuidUtils.createID();
+		tokenUser.setToken(token);
 		String key = SessionConst.PREFIX_TOKEN + token;
 		String value = JsonUtils.toJsonString(tokenUser);
 		redisService.set(key, value, SessionConst.SESSION_EXPIRE);

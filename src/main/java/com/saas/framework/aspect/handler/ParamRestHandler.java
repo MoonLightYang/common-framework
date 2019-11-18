@@ -38,6 +38,7 @@ public class ParamRestHandler implements IRestHandler {
 		param.setHandler(user.getHandler());
 		param.setHandlerNo(user.getHandlerNo());
 		param.setEnterpriseId(user.getEnterpriseId());
+		param.setToken(user.getToken());
 		
 		HttpServletRequest request = params.getRequest();
 		param.setIpAddress(request.getRemoteAddr());

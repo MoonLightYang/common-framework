@@ -36,12 +36,12 @@ public class LoginVerifyHandler extends AbstractAuthVerifyHandler implements IRe
 
 		String token = params.getToken();
 		if (StringUtils.isEmpty(token))
-			return RestEntity.FAIL().info("登录失效，请先登陆");
+			return RestEntity.EXPIRE();
 		
 		String loginKey = params.getLoginKey();
 		String loginUserJson = redisService.get(loginKey);
 		if(StringUtils.isEmpty(loginUserJson))
-			return RestEntity.FAIL().info("登陆失效，请先登陆");
+			return RestEntity.EXPIRE();
 		
 		TokenUser user = super.convert(loginUserJson);
 		params.setLoginUser(user);

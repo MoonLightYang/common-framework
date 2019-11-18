@@ -21,6 +21,10 @@ public class SuperParam {
 	@Getter
 	public Integer enterpriseId; // 公司Id
 
+	@Setter
+	@Getter
+	public String token;
+
 	public SuperParam() {
 	}
 
