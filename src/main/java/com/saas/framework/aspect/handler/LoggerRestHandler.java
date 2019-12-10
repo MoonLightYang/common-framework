@@ -31,7 +31,9 @@ public class LoggerRestHandler implements IRestHandler {
 		String method = params.getMethodName();
 		String clazz = params.getClassName();
 		Object[] args = params.getArgs();
-		LOGGER.debug("方法：{}.{}，参数：{}", clazz, method, JsonUtils.toJsonString(args));
+		if(args != null && args.length > 0) {
+			LOGGER.debug("方法：{}.{}，参数：{}", clazz, method, JsonUtils.toJsonString(args[0]));	
+		}
 	}
 
 }
