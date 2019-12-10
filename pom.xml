@@ -15,8 +15,27 @@
 	<artifactId>framework-common</artifactId>
 	<version>1.2.7-RELEASE</version>
 	<name>framework-common</name>
+	
+	<properties>
+		<easypoi>4.1.0</easypoi>
+	</properties>
 
 	<dependencies>
+		<dependency>
+		    <groupId>cn.afterturn</groupId>
+		    <artifactId>easypoi-base</artifactId>
+		    <version>${easypoi}</version>
+		</dependency>
+		<dependency>
+		    <groupId>cn.afterturn</groupId>
+		    <artifactId>easypoi-web</artifactId>
+		    <version>${easypoi}</version>
+		</dependency>
+		<dependency>
+		    <groupId>cn.afterturn</groupId>
+		    <artifactId>easypoi-annotation</artifactId>
+		    <version>${easypoi}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
