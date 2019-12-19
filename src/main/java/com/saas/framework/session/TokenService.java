@@ -9,10 +9,10 @@ import com.saas.framework.utils.UuidUtils;
 
 @Service
 public class TokenService {
-	
+
 	@Autowired
 	RedisService redisService;
-	
+
 	public String serializer(TokenUser tokenUser) {
 		String token = UuidUtils.createID();
 		tokenUser.setToken(token);
@@ -21,7 +21,10 @@ public class TokenService {
 		redisService.set(key, value, SessionConst.SESSION_EXPIRE);
 		return token;
 	}
-	
-	
+
+	public void logout(String token) {
+		String key = SessionConst.PREFIX_TOKEN + token;
+		redisService.delete(key);
+	}
 
 }
