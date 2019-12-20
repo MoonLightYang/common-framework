@@ -14,7 +14,7 @@ import com.saas.framework.session.TokenUser;
 public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRestHandler {
 
 	private AuthVerifyHandler() {
-		handlers.add(this);
+		handlers.add(3, this);
 	}
 
 	@Autowired

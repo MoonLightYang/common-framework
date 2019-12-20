@@ -13,7 +13,7 @@ import com.saas.framework.params.SuperParam;
 public class GuestHandler extends AbstractAuthVerifyHandler implements IRestHandler {
 
 	private GuestHandler() {
-		handlers.add(this);
+		handlers.add(0, this);
 	}
 
 	@Autowired

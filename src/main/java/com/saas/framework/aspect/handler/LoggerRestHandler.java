@@ -13,7 +13,7 @@ public class LoggerRestHandler implements IRestHandler {
 	Logger LOGGER = LoggerFactory.getLogger(LoggerRestHandler.class);
 
 	private LoggerRestHandler() {
-		handlers.add(this);
+		handlers.add(4, this);
 	}
 
 	@Override

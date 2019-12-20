@@ -12,7 +12,7 @@ import com.saas.framework.session.TokenUser;
 public class ParamRestHandler implements IRestHandler {
 	
 	private ParamRestHandler() {
-		handlers.add(this);
+		handlers.add(1, this);
 	}
 
 	@Override
