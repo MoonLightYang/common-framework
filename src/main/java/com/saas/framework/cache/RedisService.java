@@ -22,6 +22,8 @@ import org.springframework.util.StringUtils;
 
 import com.saas.framework.exception.SaasException;
 
+import io.lettuce.core.GeoArgs.Unit;
+
 @Service
 public class RedisService {
 
@@ -130,6 +132,26 @@ public class RedisService {
 		return atomic.getAndIncrement() + 1;
 	}
 
+	
+	/**
+	 * 自增并设定过期时间
+	 *
+	 * @param key
+	 * @author Moon Yang
+	 * @since 2018-05-18
+	 */
+	public Integer incrementExpire(String key, long seconds) {
+		LettuceConnectionFactory factory = (LettuceConnectionFactory) template.getConnectionFactory();
+		RedisAtomicInteger atomic = new RedisAtomicInteger(key, factory);
+		Integer atomicInteger = atomic.getAndIncrement();
+		if (atomicInteger == 0) {
+			atomic.expire(seconds, TimeUnit.SECONDS);
+		}
+
+		return atomicInteger + 1;
+	}
+	
+	
 	/**
 	 * 主要用于各种自增编号的生成，如果没有当前key，则初始返回1
 	 *
