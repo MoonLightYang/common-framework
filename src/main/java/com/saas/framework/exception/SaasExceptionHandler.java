@@ -43,6 +43,7 @@ public class SaasExceptionHandler {
 
 	@ExceptionHandler(value = HttpMessageNotReadableException.class)
 	public RestEntity handleException(HttpMessageNotReadableException causeEx) {
+		System.out.println(causeEx.getMessage());
 		causeEx.printStackTrace();
 		String error = "传入参数有误";
 		Throwable ex = causeEx.getCause();
@@ -54,6 +55,7 @@ public class SaasExceptionHandler {
 
 	@ExceptionHandler(value = Exception.class)
 	public RestEntity handleException(Exception ex) {
+		System.out.println(ex.getMessage());
 		ex.printStackTrace();
 		String error = ex.getMessage();
 		return RestEntity.ERROR().info(error);

@@ -30,18 +30,18 @@ public class RedisService {
 	@Autowired
 	private StringRedisTemplate template;
 
-	public void setHash(String key) {
-
-		List<String> menus = new ArrayList<>();
-		menus.add("/company/add");
-		menus.add("/company/insert");
-		menus.add("/company/delete");
-		menus.add("/company/find");
-
-		SetOperations<String, String> operate = template.opsForSet();
-		String[] values = menus.toArray(new String[menus.size()]);
-		operate.add(key, values);
-	}
+//	private void setHash(String key) {
+//
+//		List<String> menus = new ArrayList<>();
+//		menus.add("/company/add");
+//		menus.add("/company/insert");
+//		menus.add("/company/delete");
+//		menus.add("/company/find");
+//
+//		SetOperations<String, String> operate = template.opsForSet();
+//		String[] values = menus.toArray(new String[menus.size()]);
+//		operate.add(key, values);
+//	}
 
 	public boolean hasSetValue(String key, String value) {
 		if (StringUtils.isEmpty(key))

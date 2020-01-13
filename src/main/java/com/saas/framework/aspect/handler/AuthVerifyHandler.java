@@ -1,5 +1,7 @@
 package com.saas.framework.aspect.handler;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -11,10 +13,13 @@ import com.saas.framework.cache.RedisService;
 import com.saas.framework.session.TokenUser;
 
 @Component
-public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRestHandler {
+public class AuthVerifyHandler implements IRestHandler {
 
 	private AuthVerifyHandler() {
 		handlers.add(this);
+		if (handlers.size() == HANDLER_SIZE) {
+			Collections.sort(handlers, compare);
+		}
 	}
 
 	@Autowired
@@ -22,7 +27,11 @@ public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRes
 
 	@Override
 	public void beforeHandler() {
-		handlers.add(1, this);
+		handlers.add(this);
+	}
+
+	public Integer compare() {
+		return 3;
 	}
 
 	@Override
@@ -40,7 +49,7 @@ public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRes
 		if (StringUtils.isEmpty(loginUserJson))
 			return RestEntity.EXPIRE();
 
-		TokenUser user = super.convert(loginUserJson);
+		TokenUser user = params.getLoginUser();
 		params.setLoginUser(user);
 
 		String authKey = params.getAuthKey();
@@ -54,8 +63,6 @@ public class AuthVerifyHandler extends AbstractAuthVerifyHandler implements IRes
 		if (!flag)
 			return RestEntity.FORBIDDEN();
 
-		// refresh token
-		super.refreshToken(redisService, params);
 		return null;
 	}
 

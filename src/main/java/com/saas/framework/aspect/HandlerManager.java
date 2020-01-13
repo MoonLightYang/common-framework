@@ -19,10 +19,15 @@ public class HandlerManager implements IRestHandler {
 		Object result = null;
 		for (IRestHandler handler : handlers) {
 			result = handler.aroundHandler(params);
-			if(result != null) 
+			if (result != null)
 				break;
 		}
 		return result;
+	}
+
+	@Override
+	public Integer compare() {
+		return null;
 	}
 
 }

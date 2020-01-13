@@ -25,6 +25,7 @@ public class HandlerParams {
 	private String loginKey;
 	private String authKey;
 	private String uri;
+	private String ip;
 	private TokenUser loginUser;
 
 }
