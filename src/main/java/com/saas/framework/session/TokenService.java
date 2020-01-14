@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.saas.framework.aspect.handler.HandlerParams;
+import com.saas.framework.aspect.params.HandlerParams;
 import com.saas.framework.cache.RedisService;
-import com.saas.framework.exception.SaasException;
 import com.saas.framework.utils.JsonUtils;
 import com.saas.framework.utils.UuidUtils;
 
@@ -24,9 +23,12 @@ public class TokenService {
 
 	public TokenUser unSerializer(String loginRediskey) {
 		if (StringUtils.isEmpty(loginRediskey))
-			throw new SaasException("无效登陆访问...");
+			return null;
 
 		String tokenUserJson = redisService.get(loginRediskey);
+		if (StringUtils.isEmpty(tokenUserJson))
+			return null;
+
 		return JsonUtils.toObject(tokenUserJson, TokenUser.class);
 	}
 

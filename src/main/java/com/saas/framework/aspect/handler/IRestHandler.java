@@ -1,14 +1,16 @@
-package com.saas.framework.aspect;
+package com.saas.framework.aspect.handler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.saas.framework.aspect.handler.HandlerParams;
+import com.saas.framework.aspect.params.HandlerParams;
 
 public interface IRestHandler {
 
-	Integer HANDLER_SIZE = 3;
+	Integer HANDLER_SIZE = 4;
+
+	List<IRestHandler> handlers = new ArrayList<IRestHandler>();
 
 	Comparator<IRestHandler> compare = new Comparator<IRestHandler>() {
 		@Override
@@ -22,7 +24,5 @@ public interface IRestHandler {
 	void beforeHandler();
 
 	Object aroundHandler(HandlerParams params);
-
-	List<IRestHandler> handlers = new ArrayList<IRestHandler>();
 
 }

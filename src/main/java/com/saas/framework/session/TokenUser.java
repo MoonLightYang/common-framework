@@ -13,7 +13,7 @@ public class TokenUser {
 	private String account;
 	private String handler;
 	private Integer handlerNo;
-	private String ipAddress;
+	private String ip;
 	private String token;
 
 }

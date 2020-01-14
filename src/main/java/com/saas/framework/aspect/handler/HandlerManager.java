@@ -1,8 +1,8 @@
-package com.saas.framework.aspect;
+package com.saas.framework.aspect.handler;
 
 import org.springframework.stereotype.Component;
 
-import com.saas.framework.aspect.handler.HandlerParams;
+import com.saas.framework.aspect.params.HandlerParams;
 
 @Component
 public class HandlerManager implements IRestHandler {

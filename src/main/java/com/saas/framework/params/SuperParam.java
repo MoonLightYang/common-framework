@@ -15,7 +15,7 @@ public class SuperParam {
 
 	@Getter
 	@Setter
-	public String ipAddress; // ip 地址
+	public String ip; // ip 地址
 
 	@Setter
 	@Getter

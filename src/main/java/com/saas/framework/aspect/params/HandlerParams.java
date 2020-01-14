@@ -1,4 +1,4 @@
-package com.saas.framework.aspect.handler;
+package com.saas.framework.aspect.params;
 
 import java.lang.reflect.Method;
 
@@ -23,7 +23,9 @@ public class HandlerParams {
 	private Object[] args;
 	private String token;
 	private String loginKey;
+	private boolean loginVeify = false;
 	private String authKey;
+	private boolean authVeify = false;
 	private String uri;
 	private String ip;
 	private TokenUser loginUser;

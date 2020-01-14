@@ -13,21 +13,23 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.saas.framework.aspect.handler.HandlerParams;
-import com.saas.framework.aspect.handler.LoggerRestHandler;
+import com.saas.framework.aspect.handler.HandlerManager;
+import com.saas.framework.aspect.params.HandlerParams;
+import com.saas.framework.aspect.process.Processer;
 
 @Aspect
 @Component
-public class RestHandlerAop {
+public class HandlerAspect {
 
 	Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	HandlerManager handlerManager;
-	@Autowired
-	LoggerRestHandler loggerHandler;
 
-	public RestHandlerAop() {
+	@Autowired
+	Processer processer;
+
+	public HandlerAspect() {
 
 	}
 
@@ -40,7 +42,7 @@ public class RestHandlerAop {
 		if (uri.contains("api/"))
 			return point.proceed();
 
-		HandlerParams params = loggerHandler.process(point, request, response);
+		HandlerParams params = processer.process(point, request, response);
 
 		Object result = handlerManager.aroundHandler(params);
 		if (result != null)

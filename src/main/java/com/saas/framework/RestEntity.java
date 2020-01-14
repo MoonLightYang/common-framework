@@ -7,17 +7,17 @@ import lombok.Data;
 @Data
 public class RestEntity {
 
-	private static final int SUCCESS = 200;
-	private static final int FAIL = 400;
-	private static final int ERROR = 500;
-	private static final int EXPIRE = 401;
-	private static final int FORBIDDEN = 403;
+	public static final int SUCCESS = 200;
+	public static final int FAIL = 400;
+	public static final int ERROR = 500;
+	public static final int EXPIRE = 401;
+	public static final int FORBIDDEN = 403;
 
-	private static final String INFO_FORBIDDEN = "无权限，禁止访问";
-	private static final String INFO_EXPIRE = "登录失效";
-	private static final String INFO_SUCCESS = "操作成功";
-	private static final String INFO_FAIL = "操作失败";
-	private static final String INFO_ERROR = "网络好像奔溃了...";
+	public static final String INFO_FORBIDDEN = "无权限，禁止访问";
+	public static final String INFO_EXPIRE = "登录失效";
+	public static final String INFO_SUCCESS = "操作成功";
+	public static final String INFO_FAIL = "操作失败";
+	public static final String INFO_ERROR = "网络好像奔溃了...";
 
 	private String info = INFO_SUCCESS;
 	private Integer code = SUCCESS;
