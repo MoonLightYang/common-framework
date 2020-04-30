@@ -45,18 +45,27 @@ public class ParameterHandler implements IRestHandler {
 	}
 
 	private void aspectParams(HandlerParams params) {
-		TokenUser user = params.getLoginUser();
-		if (user == null)
-			return;
-
 		Object[] args = params.getArgs();
 		Object arg1 = args[0];
 		SuperParam superParam = (SuperParam) arg1;
+		
+		this.guestParamsHandle(superParam, params);
 
+		TokenUser user = params.getLoginUser();
+		if (user == null)
+			return;
+		this.userParamsHandle(superParam, user);
+	}
+
+	private void guestParamsHandle(SuperParam superParam, HandlerParams params) {
+		superParam.setIp(params.getIp());
+	}
+
+	private void userParamsHandle(SuperParam superParam, TokenUser user) {
 		superParam.setHandler(user.getHandler());
 		superParam.setHandlerNo(user.getHandlerNo());
 		superParam.setEnterpriseId(user.getEnterpriseId());
 		superParam.setToken(user.getToken());
-		superParam.setIp(params.getIp());
 	}
+
 }

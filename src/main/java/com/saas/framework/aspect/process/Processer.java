@@ -95,22 +95,29 @@ public class Processer {
 		params.setPoint(point);
 		params.setClassName(clazz);
 		params.setIp(ip);
-
+		
 		return params;
 	}
 
+	// && !"unknown".equalsIgnoreCase(ip)
 	private String ipParams(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
+		if (!StringUtils.isEmpty(ip))
+			return ip;
+
+		ip = request.getHeader("Proxy-Client-IP");
+		if (!StringUtils.isEmpty(ip))
+			return ip;
+
+		ip = request.getHeader("WL-Proxy-Client-IP");
+		if (!StringUtils.isEmpty(ip))
+			return ip;
+
+		ip = request.getRemoteAddr();
+		if (!StringUtils.isEmpty(ip))
+			return ip;
+
+		return null;
 	}
 
 	/**
