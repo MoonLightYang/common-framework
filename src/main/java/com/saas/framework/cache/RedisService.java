@@ -128,7 +128,6 @@ public class RedisService {
 		return atomic.getAndIncrement() + 1;
 	}
 
-	
 	/**
 	 * 自增并设定过期时间
 	 *
@@ -146,8 +145,7 @@ public class RedisService {
 
 		return atomicInteger + 1;
 	}
-	
-	
+
 	/**
 	 * 主要用于各种自增编号的生成，如果没有当前key，则初始返回1
 	 *

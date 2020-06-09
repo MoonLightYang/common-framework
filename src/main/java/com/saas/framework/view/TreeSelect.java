@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-public class TreeSelect extends Select {
+public class TreeSelect extends Options {
 
 	@Getter
 	@Setter
-	private ArrayList<Select> childs;
+	private ArrayList<Options> childs;
 
 }

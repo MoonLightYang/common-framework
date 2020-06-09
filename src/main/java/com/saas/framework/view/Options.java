@@ -1,14 +1,15 @@
 package com.saas.framework.view;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Select {
+@AllArgsConstructor
+public class Options {
 
-	private String key;
-
+	protected String text;
 	protected String value;
 
 }

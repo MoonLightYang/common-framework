@@ -4,45 +4,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.saas.framework.aspect.params.HandlerParams;
 import com.saas.framework.cache.RedisService;
 import com.saas.framework.utils.JsonUtils;
 import com.saas.framework.utils.UuidUtils;
 
 @Service
-public class TokenService {
+public class SessionService {
 
 	@Autowired
 	RedisService redisService;
 
-	public void refreshSession(HandlerParams params) {
-		String loginKey = params.getLoginKey();
-		redisService.expire(loginKey, SessionConst.SESSION_EXPIRE);
+	public void refreshSession(String token) {
+		if (StringUtils.isEmpty(token))
+			return;
 
+		redisService.expire(token, SessionConst.SESSION_EXPIRE_MINUTES);
 	}
 
-	public TokenUser unSerializer(String loginRediskey) {
-		if (StringUtils.isEmpty(loginRediskey))
+	public SessionUser unserializer(String token) {
+		if (StringUtils.isEmpty(token))
 			return null;
 
-		String tokenUserJson = redisService.get(loginRediskey);
-		if (StringUtils.isEmpty(tokenUserJson))
+		String key = this.getRedisTokenKey(token);
+		String value = redisService.get(key);
+		if (StringUtils.isEmpty(value))
 			return null;
 
-		return JsonUtils.toObject(tokenUserJson, TokenUser.class);
+		return JsonUtils.toObject(value, SessionUser.class);
 	}
 
-	public String serializer(TokenUser tokenUser) {
+	public String serializer(SessionUser sessionUser) {
 		String token = UuidUtils.createID();
-		tokenUser.setToken(token);
-		String key = SessionConst.PREFIX_TOKEN + token;
-		String value = JsonUtils.toJsonString(tokenUser);
-		redisService.set(key, value, SessionConst.SESSION_EXPIRE);
+		sessionUser.setToken(token);
+		String key = this.getRedisTokenKey(token);
+		String value = JsonUtils.toJsonString(sessionUser);
+		redisService.set(key, value, SessionConst.SESSION_EXPIRE_MINUTES);
 		return token;
 	}
 
 	public void logout(String token) {
-		String key = SessionConst.PREFIX_TOKEN + token;
+		String key = this.getRedisTokenKey(token);
 		redisService.delete(key);
 	}
 
@@ -69,6 +70,16 @@ public class TokenService {
 		StringBuilder sb = new StringBuilder(50);
 		sb.append(SessionConst.PREFIX_AUTH);
 		sb.append(token);
+		return sb.toString();
+	}
+
+	private String getRedisTokenKey(String token) {
+		if (StringUtils.isEmpty(token))
+			return null;
+
+		StringBuilder sb = new StringBuilder(50);
+		sb.append(SessionConst.PREFIX_TOKEN).append(token);
+
 		return sb.toString();
 	}
 

@@ -4,23 +4,19 @@ import javax.validation.constraints.NotNull;
 
 import com.saas.framework.annotation.DocField;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class Id extends SuperParam {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Id extends SuperParams {
 
 	@Getter
 	@Setter
-	@NotNull
+	@NotNull(message = "缺少必要查询条件")
 	@DocField(name = "id", remark = "数据记录id")
 	public Integer id;
-
-	public Id() {
-
-	}
-
-	public Id(Integer id) {
-		this.id = id;
-	}
 
 }

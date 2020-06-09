@@ -2,7 +2,7 @@ package com.saas.framework.aspect.handler;
 
 import org.springframework.stereotype.Component;
 
-import com.saas.framework.aspect.params.HandlerParams;
+import com.saas.framework.aspect.params.HandlerParamters;
 
 @Component
 public class HandlerManager implements IRestHandler {
@@ -15,7 +15,7 @@ public class HandlerManager implements IRestHandler {
 	}
 
 	@Override
-	public Object aroundHandler(HandlerParams params) {
+	public Object aroundHandler(HandlerParamters params) {
 		Object result = null;
 		for (IRestHandler handler : handlers) {
 			result = handler.aroundHandler(params);

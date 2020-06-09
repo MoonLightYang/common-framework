@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import com.saas.framework.session.TokenUser;
+import com.saas.framework.session.SessionUser;
 
 import lombok.Data;
 
 @Data
-public class HandlerParams {
+public class RequestParams {
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -28,6 +28,6 @@ public class HandlerParams {
 	private boolean authVeify = false;
 	private String uri;
 	private String ip;
-	private TokenUser loginUser;
+	private SessionUser loginUser;
 
 }

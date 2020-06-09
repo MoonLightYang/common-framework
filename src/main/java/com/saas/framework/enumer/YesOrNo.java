@@ -2,7 +2,7 @@ package com.saas.framework.enumer;
 
 public enum YesOrNo implements IEnum {
 
-	NO(0, "否"), YES(1, "是");
+	YES(1, "是"), NO(0, "否");
 
 	private int value;
 

@@ -10,56 +10,46 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.saas.framework.annotation.AuthSign;
-import com.saas.framework.annotation.LoginSign;
-import com.saas.framework.aspect.params.HandlerParams;
+import com.saas.framework.annotation.Authorition;
+import com.saas.framework.annotation.Login;
+import com.saas.framework.aspect.params.AnnotationParams;
+import com.saas.framework.aspect.params.HandlerParamters;
+import com.saas.framework.aspect.params.ProcessParams;
+import com.saas.framework.aspect.params.RequestParams;
 import com.saas.framework.session.SessionConst;
-import com.saas.framework.session.TokenService;
-import com.saas.framework.session.TokenUser;
+import com.saas.framework.session.SessionUser;
 
 @Component
 public class Processer {
 
-	Logger LOGGER = LoggerFactory.getLogger(Processer.class);
+	Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	TokenService tokenService;
+	public HandlerParamters process(ProceedingJoinPoint point, HttpServletRequest servletRequest,
+			HttpServletResponse servletResponse) {
+		// 1：请求头相关信息
+		RequestParams request = this.requestHandle(servletRequest);
 
-	public HandlerParams process(ProceedingJoinPoint point, HttpServletRequest request, HttpServletResponse response) {
-		// 1：返回来宾参数参数
-		HandlerParams params = this.guestParams(point, request, response);
+		// 2：处理点相关信息
+		ProcessParams process = this.processHandle(point);
 
-		// 2：是否需要登录和权限认证
-		this.isLoginOrAuth(params);
+		// 3：是否需要登录和权限认证
+		AnnotationParams annos = this.loginAuthHandle(process);
 
-		// 3：设置redis的token key,如果没有登录则为空
-		this.setRedisTokenKey(params, request);
-
-		// 4: 登录用户信息注入
-		this.injectUser(params);
-
-		return params;
+		// 4：session信息相关
+		SessionUser session = this.sessionHandle(servletRequest);
+		return new HandlerParamters(request, process, annos, session);
 	}
 
-	/**
-	 * 登录或权限验证标识获取
-	 * 
-	 * @param params
-	 * @return
-	 */
-	private HandlerParams isLoginOrAuth(HandlerParams params) {
-		Method method = params.getMethod();
-		LoginSign loginSign = method.getAnnotation(LoginSign.class);
-		AuthSign authSign = method.getAnnotation(AuthSign.class);
-		if (loginSign != null) {
-			params.setLoginVeify(true);
-		} else if (authSign != null) {
-			params.setAuthVeify(true);
-		}
+	private RequestParams requestHandle(HttpServletRequest servletRequest) {
+		String ip = this.getIp(servletRequest);
+		String uri = servletRequest.getRequestURI();
+
+		RequestParams params = new RequestParams();
+		params.setIp(ip);
+		params.setUri(uri);
 		return params;
 	}
 
@@ -71,36 +61,7 @@ public class Processer {
 	 * @param response
 	 * @return
 	 */
-	private HandlerParams guestParams(ProceedingJoinPoint point, HttpServletRequest request,
-			HttpServletResponse response) {
-		Signature signature = point.getSignature();
-		MethodSignature methodSignature = (MethodSignature) signature;
-		Method method = methodSignature.getMethod();
-
-		// 类和方法相关信息
-		String clazzStr = point.getTarget().toString();
-		String clazz = clazzStr.substring(0, clazzStr.indexOf("@"));
-
-		// ip参数
-		String ip = this.ipParams(request);
-
-		// 返回来宾参数对象
-		HandlerParams params = new HandlerParams();
-		params.setUri(request.getRequestURI());
-		params.setRequest(request);
-		params.setResponse(response);
-		params.setMethod(method);
-		params.setMethodName(methodSignature.getName());
-		params.setArgs(point.getArgs());
-		params.setPoint(point);
-		params.setClassName(clazz);
-		params.setIp(ip);
-		
-		return params;
-	}
-
-	// && !"unknown".equalsIgnoreCase(ip)
-	private String ipParams(HttpServletRequest request) {
+	private String getIp(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
 		if (!StringUtils.isEmpty(ip))
 			return ip;
@@ -117,44 +78,48 @@ public class Processer {
 		if (!StringUtils.isEmpty(ip))
 			return ip;
 
-		return null;
+		return ip;
+	}
+
+	private ProcessParams processHandle(ProceedingJoinPoint point) {
+		Signature signature = point.getSignature();
+		MethodSignature methodSignature = (MethodSignature) signature;
+
+		Method method = methodSignature.getMethod();
+		String clazzStr = point.getTarget().toString();
+		String clazz = clazzStr.substring(0, clazzStr.indexOf("@"));
+
+		ProcessParams params = new ProcessParams();
+		params.setMethod(method);
+		params.setMethodName(methodSignature.getName());
+		params.setArgs(point.getArgs());
+		params.setPoint(point);
+		params.setClassName(clazz);
+
+		return params;
 	}
 
 	/**
-	 * 设置redis对应的权限token key
+	 * 登录或权限验证标识获取
 	 * 
 	 * @param params
-	 * @param request
+	 * @return
 	 */
-	private HandlerParams setRedisTokenKey(HandlerParams params, HttpServletRequest request) {
-		String token = request.getHeader(SessionConst.ACCESS_TOKEN);
-		if (StringUtils.isEmpty(token))
-			return params;
+	private AnnotationParams loginAuthHandle(ProcessParams processPrams) {
+		Method method = processPrams.getMethod();
+		Login login = method.getAnnotation(Login.class);
+		Authorition auth = method.getAnnotation(Authorition.class);
 
-		params.setToken(token);
-
-		String loginKey = tokenService.loginRedisKey(token);
-		params.setLoginKey(loginKey);
-
-		String authKey = tokenService.authRedisKey(token);
-		params.setAuthKey(authKey);
+		boolean isLogin = login != null ? true : false;
+		boolean isAuth = auth != null ? true : false;
+		AnnotationParams params = new AnnotationParams(isLogin, isAuth);
 		return params;
 	}
 
-	private HandlerParams injectUser(HandlerParams params) {
-		String loginKey = params.getLoginKey();
-		if (StringUtils.isEmpty(loginKey))
-			return params;
+	private SessionUser sessionHandle(HttpServletRequest servletRequest) {
+		String token = servletRequest.getHeader(SessionConst.ACCESS_TOKEN);
 
-		TokenUser user = tokenService.unSerializer(params.getLoginKey());
-		if (user == null)
-			return params;
-
-		// TODO 这个用获取并且重置过期时间
-		params.setLoginUser(user);
-		user.setIp(params.getIp());
-		tokenService.refreshSession(params);
-		return params;
+		SessionUser session = new SessionUser(token);
+		return session;
 	}
-
 }

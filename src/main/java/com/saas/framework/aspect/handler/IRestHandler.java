@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.saas.framework.aspect.params.HandlerParams;
+import com.saas.framework.aspect.params.HandlerParamters;
 
 public interface IRestHandler {
 
-	Integer HANDLER_SIZE = 4;
+	Integer HANDLER_SIZE = 3;
 
 	List<IRestHandler> handlers = new ArrayList<IRestHandler>();
 
@@ -23,6 +23,6 @@ public interface IRestHandler {
 
 	void beforeHandler();
 
-	Object aroundHandler(HandlerParams params);
+	Object aroundHandler(HandlerParamters params);
 
 }

@@ -2,6 +2,8 @@ package com.saas.framework;
 
 import java.util.HashMap;
 
+import org.springframework.util.StringUtils;
+
 import lombok.Data;
 
 @Data
@@ -10,14 +12,19 @@ public class RestEntity {
 	public static final int SUCCESS = 200;
 	public static final int FAIL = 400;
 	public static final int ERROR = 500;
-	public static final int EXPIRE = 401;
-	public static final int FORBIDDEN = 403;
 
-	public static final String INFO_FORBIDDEN = "无权限，禁止访问";
-	public static final String INFO_EXPIRE = "登录失效";
 	public static final String INFO_SUCCESS = "操作成功";
 	public static final String INFO_FAIL = "操作失败";
 	public static final String INFO_ERROR = "网络好像奔溃了...";
+
+	// ------------------------------------------
+	public static final int UNLOGIN = 401;
+	public static final int EXPIRE = 402;
+	public static final int FORBIDDEN = 403;
+
+	public static final String INFO_UNLOGIN = "用户未登录";
+	public static final String INFO_FORBIDDEN = "无权限，禁止访问";
+	public static final String INFO_EXPIRE = "登录已过期";
 
 	private String info = INFO_SUCCESS;
 	private Integer code = SUCCESS;
@@ -46,6 +53,18 @@ public class RestEntity {
 	}
 
 	/**
+	 * 操作失败
+	 * 
+	 * @return
+	 */
+	public static RestEntity FAIL(String info) {
+		if (StringUtils.isEmpty(info))
+			return build().code(FAIL).info(INFO_FAIL);
+
+		return build().code(FAIL).info(info);
+	}
+
+	/**
 	 * 操作异常
 	 * 
 	 * @return
@@ -70,6 +89,15 @@ public class RestEntity {
 	 */
 	public static RestEntity FORBIDDEN() {
 		return build().code(FORBIDDEN).info(INFO_FORBIDDEN);
+	}
+
+	/**
+	 * 用户、未登陆
+	 * 
+	 * @return
+	 */
+	public static RestEntity UNLOGIN() {
+		return build().code(UNLOGIN).info(INFO_UNLOGIN);
 	}
 
 	public static RestEntity build() {
