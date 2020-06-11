@@ -37,7 +37,7 @@ public abstract class AbstractService<T, P> {
 		PageList<P> page = new PageList<P>(query.getPageNo(), query.getPageSize(), rows);
 
 		Long total = this.mapper().pageCount(query);
-		page.setTotal(total);
+		// page.setTotal(total);
 		return page;
 	}
 
