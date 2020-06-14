@@ -13,9 +13,9 @@ public class RestEntity {
 	public static final int FAIL = 400;
 	public static final int ERROR = 500;
 
-	public static final String INFO_SUCCESS = "操作成功";
-	public static final String INFO_FAIL = "操作失败";
-	public static final String INFO_ERROR = "网络好像奔溃了...";
+	public static final String INFO_SUCCESS = "成功";
+	public static final String INFO_FAIL = "失败";
+	public static final String INFO_ERROR = "网络奔溃了...";
 
 	// ------------------------------------------
 	public static final int UNLOGIN = 401;

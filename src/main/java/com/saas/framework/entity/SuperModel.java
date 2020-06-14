@@ -5,7 +5,7 @@ import com.saas.framework.enumer.YesOrNo;
 import lombok.Getter;
 import lombok.Setter;
 
-public class SuperEntity {
+public class SuperModel {
 
 	@Getter
 	@Setter
@@ -21,12 +21,12 @@ public class SuperEntity {
 	public Integer handlerNo; // 操作人账户号
 	@Getter
 	@Setter
-	public YesOrNo is_delete; // 是否可用数据
+	public YesOrNo isDelete; // 是否删除
 	@Getter
 	@Setter
 	public Integer version; // 版本号
 
-	public SuperEntity() {
+	public SuperModel() {
 	}
 
 }

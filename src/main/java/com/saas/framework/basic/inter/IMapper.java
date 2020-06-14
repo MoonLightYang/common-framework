@@ -5,6 +5,7 @@ import java.util.List;
 import com.saas.framework.params.Id;
 import com.saas.framework.params.IdVersion;
 import com.saas.framework.params.QueryPage;
+import com.saas.framework.params.SuperParams;
 import com.saas.framework.view.Options;
 
 public interface IMapper<T, P> {
@@ -47,10 +48,10 @@ public interface IMapper<T, P> {
 	/**
 	 * 查询列表
 	 * 
-	 * @param query
+	 * @param listParams
 	 * @return
 	 */
-	List<T> list(QueryPage query);
+	List<T> list();
 
 	/**
 	 * 下拉选项
@@ -58,6 +59,6 @@ public interface IMapper<T, P> {
 	 * @param query
 	 * @return
 	 */
-	List<Options> listOptions();
+	List<Options> listOptions(SuperParams listParams);
 
 }

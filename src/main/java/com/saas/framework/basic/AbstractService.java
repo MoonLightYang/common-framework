@@ -7,7 +7,6 @@ import com.saas.framework.basic.inter.IMapper;
 import com.saas.framework.params.Id;
 import com.saas.framework.params.IdVersion;
 import com.saas.framework.params.QueryPage;
-import com.saas.framework.view.Options;
 import com.saas.framework.view.PageList;
 
 public abstract class AbstractService<T, P> {
@@ -37,7 +36,7 @@ public abstract class AbstractService<T, P> {
 		PageList<P> page = new PageList<P>(query.getPageNo(), query.getPageSize(), rows);
 
 		Long total = this.mapper().pageCount(query);
-		// page.setTotal(total);
+		page.setTotal(total);
 		return page;
 	}
 
@@ -54,16 +53,16 @@ public abstract class AbstractService<T, P> {
 	public Integer modify(T t) {
 		return this.mapper().modify(t);
 	}
-	
+
 	/**
 	 * 获取所有
 	 */
-	public List<T> list(QueryPage query) {
-		return this.mapper().list(query);
+	public List<T> list() {
+		return this.mapper().list();
 	}
-	
-	public List<Options> listOptions(){
-		return this.mapper().listOptions(); 
-	}
+//
+//	public List<Options> listOptions(SuperParams optionsParams) {
+//		return this.mapper().listOptions(optionsParams);
+//	}
 
 }
