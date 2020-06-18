@@ -60,6 +60,7 @@ public abstract class AbstractService<T, P> {
 	public List<T> list() {
 		return this.mapper().list();
 	}
+	
 //
 //	public List<Options> listOptions(SuperParams optionsParams) {
 //		return this.mapper().listOptions(optionsParams);
