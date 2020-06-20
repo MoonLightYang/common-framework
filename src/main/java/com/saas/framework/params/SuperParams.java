@@ -27,14 +27,6 @@ public class SuperParams {
 	@Setter
 	public String ip;
 
-	@Getter
-	@Setter
-	public String brower;
-
-	@Getter
-	@Setter
-	public String screen;
-
 	@Setter
 	@Getter
 	public String token;

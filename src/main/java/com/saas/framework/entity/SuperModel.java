@@ -15,6 +15,9 @@ public class SuperModel {
 	public Integer enterpriseId; // 公司Id
 	@Getter
 	@Setter
+	public String enterprise; // 公司
+	@Getter
+	@Setter
 	public String handler; // 操作人昵称
 	@Getter
 	@Setter
