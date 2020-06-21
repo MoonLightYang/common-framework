@@ -19,4 +19,8 @@ public class Id extends SuperParams {
 	@DocField(name = "id", remark = "数据记录id")
 	public Integer id;
 
+	public Id(Integer id, Integer enterpriseId) {
+		this.enterpriseId = enterpriseId;
+		this.id = id;
+	}
 }

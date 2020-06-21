@@ -9,26 +9,26 @@ public class SuperParams {
 
 	@Getter
 	@Setter
-	public String handler;
+	protected String handler;
 
 	@Getter
 	@Setter
-	public Integer handlerNo;
+	protected Integer handlerNo;
 
 	@Setter
 	@Getter
-	public String enterprise;
+	protected String enterprise;
 
 	@Setter
 	@Getter
-	public Integer enterpriseId;
+	protected Integer enterpriseId;
 
 	@Getter
 	@Setter
-	public String ip;
+	protected String ip;
 
 	@Setter
 	@Getter
-	public String token;
+	protected String token;
 
 }
