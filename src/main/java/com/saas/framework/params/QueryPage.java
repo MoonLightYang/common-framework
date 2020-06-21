@@ -1,5 +1,8 @@
 package com.saas.framework.params;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class QueryPage extends SuperParams {
 
 	public Integer pageSize = 15;
@@ -25,10 +28,12 @@ public class QueryPage extends SuperParams {
 	}
 
 	public Integer getPageNo() {
+		System.out.println(pageNo);
 		return pageNo;
 	}
 
 	public void setPageNo(Integer pageNo) {
+		System.out.println(pageNo);
 		if (pageSize < 1 || pageSize > 100)
 			this.pageNo = 1;
 		else
