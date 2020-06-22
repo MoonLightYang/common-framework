@@ -63,18 +63,22 @@ public class Processer {
 	 */
 	private String getIp(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
+		System.out.println("x-forwarded-for：" + ip);
 		if (!StringUtils.isEmpty(ip))
 			return ip;
 
 		ip = request.getHeader("Proxy-Client-IP");
+		System.out.println("Proxy-Client-IP：" + ip);
 		if (!StringUtils.isEmpty(ip))
 			return ip;
 
 		ip = request.getHeader("WL-Proxy-Client-IP");
+		System.out.println("WL-Proxy-Client-IP：" + ip);
 		if (!StringUtils.isEmpty(ip))
 			return ip;
 
 		ip = request.getRemoteAddr();
+		System.out.println("Remote Addr：" + ip);
 		if (!StringUtils.isEmpty(ip))
 			return ip;
 
