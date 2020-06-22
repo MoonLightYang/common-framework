@@ -43,7 +43,7 @@ public interface IMapper<T, P> {
 	/**
 	 * 查询记录数量
 	 */
-	Long listCount();
+	Long listCount(SuperParams params);
 
 	/**
 	 * 查询列表
@@ -51,7 +51,7 @@ public interface IMapper<T, P> {
 	 * @param listParams
 	 * @return
 	 */
-	List<T> list();
+	List<T> list(SuperParams params);
 
 	/**
 	 * 下拉选项
@@ -59,6 +59,6 @@ public interface IMapper<T, P> {
 	 * @param query
 	 * @return
 	 */
-	List<Options> listOptions(SuperParams listParams);
+	List<Options> options(SuperParams params);
 
 }
