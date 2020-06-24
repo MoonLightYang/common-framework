@@ -104,6 +104,12 @@ public class RestEntity {
 		return new RestEntity();
 	}
 
+	public static RestEntity build(Object data) {
+		RestEntity rest = new RestEntity();
+		rest.setData(data);
+		return rest;
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public RestEntity fastData(String key, Object value) {
 		if (this.data instanceof HashMap) {
