@@ -17,9 +17,7 @@ public class IdVersion extends SuperParams {
 
 	@Getter
 	@Setter
-	@NotNull(message = "缺少必要查询条件")
-	@DocField(name = "version", remark = "必须字段")
-	public Integer version;
+	public Integer version = 1;
 
 	public IdVersion() {
 
