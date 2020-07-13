@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.saas.framework.params.Id;
 import com.saas.framework.params.IdVersion;
+import com.saas.framework.params.InQuery;
 import com.saas.framework.params.QueryPage;
 import com.saas.framework.params.SuperParams;
 import com.saas.framework.view.Options;
@@ -60,5 +61,13 @@ public interface IMapper<T, P> {
 	 * @return
 	 */
 	List<Options> options(SuperParams params);
+
+	/**
+	 * 根据id集合查询
+	 * 
+	 * @param query
+	 * @return
+	 */
+	List<T> findIn(InQuery ids);
 
 }
