@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class OptionsPlus {
 
 	protected String text;
-	protected String value;
+	protected Integer value;
 	protected Integer direction;
 
 }

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class Options {
 
 	protected String text;
-	protected String value;
+	protected Integer value;
 
 }

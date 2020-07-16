@@ -27,6 +27,12 @@ public class IdVersion extends SuperParams {
 		this.id = id;
 	}
 
+	public IdVersion(Integer enterpriseId, Integer id, Integer version) {
+		this.id = id;
+		this.enterpriseId = enterpriseId;
+		this.version = version;
+	}
+
 	public IdVersion(Integer id, Integer version) {
 		this.id = id;
 		this.version = version;
