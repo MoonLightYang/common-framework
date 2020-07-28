@@ -11,5 +11,6 @@ public class Options {
 
 	protected String text;
 	protected Integer value;
+	protected Integer checked = 0;
 
 }
