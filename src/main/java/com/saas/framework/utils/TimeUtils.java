@@ -1,6 +1,10 @@
 package com.saas.framework.utils;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -25,6 +29,16 @@ public class TimeUtils {
 	public static String yyyyMMdd() {
 		LocalDateTime localNow = LocalDateTime.now();
 		return FORMATTER_YYYYMMDD.format(localNow);
+	}
+
+	/**
+	 * 获取今天的日期字符串yyyyMMdd：返回示例：20191112
+	 * 
+	 * @since 2019-11-12
+	 * @return
+	 */
+	public static String yyyyMMdd(LocalDate date) {
+		return FORMATTER_YYYYMMDD.format(date);
 	}
 
 	/**

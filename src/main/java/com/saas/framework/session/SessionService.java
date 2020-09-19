@@ -14,11 +14,14 @@ public class SessionService {
 	@Autowired
 	RedisService redisService;
 
-	public void refreshSession(String token) {
+	public void refreshSession(String token, Integer minutes) {
 		if (StringUtils.isEmpty(token))
 			return;
-
-		redisService.expire(token, SessionConst.SESSION_EXPIRE_MINUTES);
+		
+		if(minutes == null || minutes < 1)
+			redisService.expire(token, SessionConst.SESSION_EXPIRE_MINUTES);
+		
+		redisService.expire(token, minutes);
 	}
 
 	public SessionUser unserializer(String token) {

@@ -51,7 +51,7 @@ public class InjectSessionHandler implements IRestHandler {
 			return null;
 		}
 		params.setSession(serverSession);
-		sessionService.refreshSession(token);
+		sessionService.refreshSession(token, 120);
 		return null;
 	}
 
