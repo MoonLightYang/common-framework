@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 public class SessionUser {
 
 	private String token;
-	private Integer enterpriseId;
 	private String enterprise;
-	private String account;
 	private String handler;
+	private Integer enterpriseId;
+	private String account;
 	private Integer handlerNo;
 
 	public SessionUser(String token) {

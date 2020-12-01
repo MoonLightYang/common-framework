@@ -6,7 +6,7 @@ import java.util.List;
 import com.saas.framework.basic.inter.IMapper;
 import com.saas.framework.params.Id;
 import com.saas.framework.params.IdVersion;
-import com.saas.framework.params.InQuery;
+import com.saas.framework.params.IdsQuery;
 import com.saas.framework.params.QueryPage;
 import com.saas.framework.params.SuperParams;
 import com.saas.framework.view.Options;
@@ -29,11 +29,11 @@ public abstract class AbstractService<T, P> {
 	public T find(Id id) {
 		return this.mapper().find(id);
 	}
-	
+
 	/**
 	 * 根据Id集合查询
 	 */
-	public List<T> findIn(InQuery ids) {
+	public List<T> findIn(IdsQuery ids) {
 		return this.mapper().findIn(ids);
 	}
 
@@ -70,7 +70,7 @@ public abstract class AbstractService<T, P> {
 	public List<T> list(SuperParams params) {
 		return this.mapper().list(params);
 	}
-	
+
 	/**
 	 * 获取所有
 	 */

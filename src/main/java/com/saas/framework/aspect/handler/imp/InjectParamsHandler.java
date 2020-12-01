@@ -50,11 +50,15 @@ public class InjectParamsHandler implements IRestHandler {
 
 		Object[] args = processParams.getArgs();
 		Object arg1 = args[0];
-		SuperParams superParam = (SuperParams) arg1;
+		if (arg1 instanceof SuperParams) {
+			SuperParams superParam = (SuperParams) arg1;
+			this.injectRequest(superParam, request);
+			this.injectSession(superParam, session);
+			this.print(processParams, session);
+			return null;
+		}
+		this.print(processParams, session);
 
-		this.injectRequest(superParam, request);
-		this.injectSession(superParam, session);
-		this.print(superParam, processParams, session);
 		return null;
 	}
 
@@ -74,7 +78,7 @@ public class InjectParamsHandler implements IRestHandler {
 		superParam.setToken(session.getToken());
 	}
 
-	private void print(SuperParams param, ProcessParams processParams, SessionUser session) {
+	private void print(ProcessParams processParams, SessionUser session) {
 		String clazz = processParams.getClassName();
 		String method = processParams.getMethodName();
 		Object[] args = processParams.getArgs();
