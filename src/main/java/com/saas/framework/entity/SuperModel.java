@@ -13,6 +13,9 @@ public class SuperModel {
 	protected Integer id; // 主键
 	@Getter
 	@Setter
+	protected Integer version; // 版本号
+	@Getter
+	@Setter
 	@JsonIgnore
 	protected Integer enterpriseId; // 公司Id
 	@Getter
@@ -31,9 +34,6 @@ public class SuperModel {
 	@Setter
 	@JsonIgnore
 	protected YesOrNo isDelete; // 是否删除
-	@Getter
-	@Setter
-	protected Integer version; // 版本号
 
 	public SuperModel() {
 	}
