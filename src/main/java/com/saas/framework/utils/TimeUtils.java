@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 /***
@@ -93,6 +94,22 @@ public class TimeUtils {
 	public static String yyyy_MM_dd() {
 		LocalDateTime localNow = LocalDateTime.now();
 		return FORMATTER_YYYY_MM_DD.format(localNow);
+	}
+	
+	public static int getCurrentMonthStartDate() {
+		LocalDateTime date = LocalDateTime.now();
+		LocalDateTime firstday = date.with(TemporalAdjusters.firstDayOfMonth());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String s = firstday.format(formatter);
+		return Integer.parseInt(s);
+	}
+
+	public static int getCurrentMonthEndDate() {
+		LocalDateTime date = LocalDateTime.now();
+		LocalDateTime lastDay = date.with(TemporalAdjusters.lastDayOfMonth());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String s = lastDay.format(formatter);
+		return Integer.parseInt(s);
 	}
 
 }
