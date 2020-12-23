@@ -30,5 +30,9 @@ public class SuperParams {
 	@Setter
 	@Getter
 	protected String token;
+	
+	@Setter
+	@Getter
+	protected Integer source;
 
 }
