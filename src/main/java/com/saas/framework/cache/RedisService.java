@@ -38,6 +38,8 @@ public class RedisService {
 //		String[] values = menus.toArray(new String[menus.size()]);
 //		operate.add(key, values);
 //	}
+	
+	
 
 	public boolean hasSetValue(String key, String value) {
 		if (StringUtils.isEmpty(key))
