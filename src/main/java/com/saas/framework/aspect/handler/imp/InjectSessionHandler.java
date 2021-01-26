@@ -51,7 +51,8 @@ public class InjectSessionHandler implements IRestHandler {
 			return null;
 		}
 		params.setSession(serverSession);
-		sessionService.refreshSession(token, 120);
+		String key = sessionService.loginRedisKey(token);
+		sessionService.refreshSession(key, 120);
 		return null;
 	}
 
