@@ -21,5 +21,12 @@ public class IdsQuery extends IdVersion {
 		this.items = items;
 		this.enterpriseId = enterpriseId;
 	}
+	
+	public IdsQuery(List<Integer> items, Integer enterpriseId, Integer handlerNo, String handler) {
+		this.items = items;
+		this.enterpriseId = enterpriseId;
+		this.handlerNo = handlerNo;
+		this.handler = handler;
+	}
 
 }
