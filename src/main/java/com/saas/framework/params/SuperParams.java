@@ -33,6 +33,6 @@ public class SuperParams {
 	
 	@Setter
 	@Getter
-	protected Integer source;
+	protected Integer source; // 来源 枚举类：AppSource
 
 }

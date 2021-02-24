@@ -34,6 +34,11 @@ public class SuperModel {
 	@Setter
 	@JsonIgnore
 	protected YesOrNo isDelete; // 是否删除
+	
+	@Getter
+	@Setter
+	@JsonIgnore
+	protected Integer source; // 来源(PC, ANDROID, IOS)
 
 	public SuperModel() {
 	}
