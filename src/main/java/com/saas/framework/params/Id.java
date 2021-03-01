@@ -23,4 +23,11 @@ public class Id extends SuperParams {
 		this.enterpriseId = enterpriseId;
 		this.id = id;
 	}
+
+	public Id(Integer id, Integer enterpriseId, String handler, Integer handlerNo) {
+		this.enterpriseId = enterpriseId;
+		this.id = id;
+		this.handler = handler;
+		this.handlerNo = handlerNo;
+	}
 }
